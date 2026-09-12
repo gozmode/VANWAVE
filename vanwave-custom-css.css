@@ -1,0 +1,291 @@
+/* =========================================================
+   VANWAVE – CUSTOM CSS
+   Stand: 07.09.2026
+   ========================================================= */
+
+/* =========================================================
+   01. BADGES – SALE & AUSVERKAUFT (site-weit)
+   ========================================================= */
+/* Gemeinsame Typografie aller Badges */
+.product-status .product-mark.sold-out,
+.summary-product-status.custom-sale-badge,
+.summary-product-status .product-mark.sold-out,
+.product-list-item .product-mark,
+.product-detail.on-sale .pdp-gallery::after {
+  font-family: rama-gothic-e !important;
+  font-size: 2.2rem !important;
+  font-weight: bold !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  padding: 0.15em 0.4em !important;
+  margin: 0 !important;
+}
+
+/* --- 01a. Produktdetailseite – AUSVERKAUFT (Status-Bereich) --- */
+.product-status .product-mark.sold-out {
+  display: inline-block !important;
+  color: #fff !important;
+  background: red !important;
+}
+
+/* --- 01b. Produktdetailseite – SALE (über der Galerie) --- */
+.product-detail.on-sale .pdp-gallery {
+  position: relative;
+}
+.product-detail.on-sale .pdp-gallery::after {
+  content: 'SALE';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  display: block;
+  color: #fff;
+  background: red;
+  pointer-events: none;
+}
+
+/* --- 01c. Summary-Blocks – Badge oben rechts auf dem Thumbnail --- */
+.summary-product-status {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  z-index: 10;
+  padding: 0 !important;
+  background: transparent !important;
+}
+.summary-product-status.custom-sale-badge {
+  color: #fff !important;
+  background: red !important;
+}
+.summary-product-status .product-mark.sold-out {
+  position: static !important;
+  display: block !important;
+  color: red !important;
+  background: #fff !important;
+}
+
+/* --- 01d. Produktlisten: Shop, Kategorien, Ähnliche Produkte --- */
+.product-list-item .product-list-item-link {
+  position: relative;
+}
+.product-list-item .product-list-item-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+.product-list-item .product-mark {
+  display: block !important;
+}
+.product-list-item .product-mark.sale {
+  color: #fff !important;
+  background: red !important;
+}
+.product-list-item .product-mark.sold-out {
+  color: red !important;
+  background: #fff !important;
+}
+
+/* =========================================================
+   02. PRODUKTDETAILSEITE – RESTOCK-BEREICH
+   ========================================================= */
+/* Restock-Bereich direkt unter "Ausverkauft" */
+.custom-restock-wrapper {
+  max-width: 520px;
+  margin-top: 14px;
+}
+/* Hinweistext */
+.custom-restock-wrapper .product-restock-cta {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+/* Formular – Desktop horizontal */
+.custom-restock-wrapper .product-restock-form {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 0;
+}
+/* Eingabebereich darf verfügbaren Platz nutzen */
+.custom-restock-wrapper .product-restock-form .sqs-site-style-form {
+  flex: 1;
+}
+/* Standard-Abstände entfernen */
+.custom-restock-wrapper .product-restock-form .form-item {
+  margin: 0;
+}
+/* E-Mail-Feld */
+.custom-restock-wrapper .product-restock-form input[type="text"] {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+/* Submit-Button */
+.custom-restock-wrapper .product-restock-form input[type="submit"] {
+  min-height: 52px;
+  padding: 0 24px !important;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   03. PRODUKTDETAILSEITE – RESTOCK MOBILE
+   ========================================================= */
+@media only screen and (max-width: 640px) {
+  .custom-restock-wrapper {
+    max-width: 100%;
+    margin-top: 12px;
+  }
+  .custom-restock-wrapper .product-restock-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .custom-restock-wrapper .product-restock-form input[type="submit"] {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   04. PRODUKTDETAILSEITE – PREIS
+   ========================================================= */
+.product-detail .product-price-value {
+  font-family: inherit !important;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+  color: #cc9933 !important;
+}
+
+/* =========================================================
+   05. SUMMARY BLOCK – PRODUKTTITEL
+   ========================================================= */
+.summary-title {
+  margin-top: 5px !important;
+  font-family: rama-gothic-e;
+  font-size: 1.8rem !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+}
+
+/* =========================================================
+   06. SUMMARY BLOCK – PREISE
+   ========================================================= */
+/* Aktueller Preis */
+.summary-price .product-price {
+  margin-top: 15px !important;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #888 !important;
+}
+/* Alter / durchgestrichener Preis */
+.summary-price .original-price {
+  font-size: 1rem;
+  font-weight: normal;
+  color: red !important;
+}
+
+/* =========================================================
+   07. SHOP-ÜBERSICHT – PRODUKTPREISE
+   ========================================================= */
+.product-list-item-price {
+  font-size: 1.2rem !important;
+  font-weight: 300 !important;
+  color: #cc9933 !important;
+}
+
+/* =========================================================
+   08. SHOP ITEM – CUSTOM ACCORDION
+   ========================================================= */
+/* Accordion-Zeile */
+.accordion-item {
+  border-bottom: 1px solid var(--paragraphMediumColor);
+}
+/* Accordion-Button */
+.accordion-trigger {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+/* Pfeil */
+.accordion-icon {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: 1rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+/* Pfeil bei geöffnetem Accordion */
+.accordion-trigger[aria-expanded="true"] .accordion-icon {
+  transform: rotate(-135deg);
+}
+/* Accordion-Inhalt */
+.accordion-content {
+  padding: 1rem 0;
+}
+/* Oberen/unteren Zusatzabstand im Inhalt entfernen */
+.accordion-content > *:first-child {
+  margin-top: 0;
+}
+.accordion-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   09. PRODUKTDETAILSEITE – ADD-ON PRODUKTE
+   ========================================================= */
+/* Abstand zwischen Add-on Cards */
+.product-add-ons {
+  gap: 16px;
+}
+/* Add-on Card */
+.product-add-ons .add-on-card {
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: box-shadow 0.2s ease;
+}
+/* Add-on Card Hover */
+.product-add-ons .add-on-card:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+/* Add-on Produktbild */
+.product-add-ons .add-on-thumbnail {
+  border-radius: 6px;
+}
+/* Add-on Produkttitel */
+.product-add-ons .add-on-details .add-on-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000;
+}
+/* Add-on Produktpreis */
+.product-add-ons .add-on-details .product-price {
+  font-size: 1.5rem !important;
+  color: #999 !important;
+}
+/* Add-to-Cart Button innerhalb der Add-ons */
+.product-add-ons .sqs-add-to-cart-button {
+  border-radius: 24px;
+}
+
+/* =========================================================
+   10. RELATED PRODUCTS – MAXIMAL 4 PRODUKTE
+   ========================================================= */
+.product-related-products .product-list-item:nth-child(n+5) {
+  display: none !important;
+}
