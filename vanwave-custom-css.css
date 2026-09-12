@@ -289,3 +289,20 @@
 .product-related-products .product-list-item:nth-child(n+5) {
   display: none !important;
 }
+
+/* =========================================================
+   11. HOTSPOT-NAVIGATOR – VARIABLEN
+   ========================================================= */
+.hsn-navigator {
+  --hsn-accent: #d6a400;
+  --hsn-ink: #f2f2f2;
+  --hsn-muted: #bdbdbd;
+  --hsn-longtext: #8f8f8f;
+  --hsn-line: #444;
+  --hsn-number-active-bg: #f2f2f2;
+  --hsn-number-active-text: #111111;
+  --hsn-dot-ring: #d6a400;
+  --hsn-dot-ring-width: 3px;
+  --hsn-dot-ring-gap: 4px;
+  --hsn-dot-glow: rgba(214, 164, 0, .28);
+}
