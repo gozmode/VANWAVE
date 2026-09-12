@@ -4,19 +4,6 @@
    ========================================================= */
 
 /* =========================================================
-   00. VARIABLEN – PRODUKTPREIS-SCHRIFTGRÖSSEN
-   Hier zentral anpassen statt in den einzelnen Abschnitten:
-   --price-font-size-summary wirkt in Abschnitt 06 (Summary Block,
-     z.B. auf Seiten mit einem Summary-Block-Element wie /neue-seite)
-   --price-font-size-list wirkt in Abschnitt 07 (Shop-Übersicht /
-     Produktkategorie-Seiten wie /shop/vanslide-heckauszuege)
-   ========================================================= */
-:root {
-  --price-font-size-summary: 2rem;
-  --price-font-size-list: 2rem;
-}
-
-/* =========================================================
    01. BADGES – SALE & AUSVERKAUFT (site-weit)
    ========================================================= */
 /* Gemeinsame Typografie aller Badges */
