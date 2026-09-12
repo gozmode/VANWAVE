@@ -190,7 +190,7 @@
 .summary-price .product-price {
   margin-top: 15px !important;
   font-size: var(--price-font-size-summary) !important;
-  font-weight: bold;
+  font-weight: normal;
   color: #888 !important;
 }
 /* Alter / durchgestrichener Preis */
