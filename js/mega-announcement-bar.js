@@ -47,8 +47,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // (Header ist hier position:absolute, nicht fixed - Prinzip ist aber dasselbe)
   const header = document.querySelector('header');
 
+  // Nur die Trigger-Zeile verdrängt den Header dauerhaft - der aufklappende
+  // Inhalt soll darüber schweben (overlay), nicht zusätzlich Platz einnehmen.
   function updateOffset() {
-    const barHeight = wrapper.getBoundingClientRect().height;
+    const barHeight = trigger.getBoundingClientRect().height;
     if (header) header.style.top = barHeight + 'px';
     document.body.style.paddingTop = barHeight + 'px';
   }
@@ -68,10 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
       trigger.classList.remove('active');
       document.body.classList.remove('announcement-open');
     }
-
-    // Höhe ändert sich durch die CSS-Transition (max-height) erst nach und nach
-    updateOffset();
-    setTimeout(updateOffset, 550);
   }
 
   updateOffset();

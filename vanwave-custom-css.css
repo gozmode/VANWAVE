@@ -374,6 +374,10 @@
 }
 
 .announcement-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
   background: #f5f5f5;
   max-height: 0;
   overflow: hidden;
@@ -381,7 +385,8 @@
 }
 
 .announcement-content.active {
-  max-height: 500px; /* ggf. an Inhalt anpassen */
+  max-height: 80vh; /* schwebt über dem Seiteninhalt, drückt ihn nicht weg */
+  overflow-y: auto;
 }
 
 .close-button {
