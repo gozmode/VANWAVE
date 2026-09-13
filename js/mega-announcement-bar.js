@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!originalFooter) return;
 
+  // Wurde die Leiste bereits per X dauerhaft geschlossen? Dann gar nicht erst aufbauen.
+  const STORAGE_KEY = 'announcement-state';
+  if (localStorage.getItem(STORAGE_KEY) === 'closed') return;
+
   // Original-Sektion markieren, damit unser CSS sie ausblenden kann
   originalFooter.classList.add('original-footer-section');
 
@@ -39,6 +43,16 @@ document.addEventListener('DOMContentLoaded', function () {
   wrapper.appendChild(content);
   document.body.insertBefore(wrapper, document.body.firstChild);
 
+  // Header um die tatsächliche Höhe der Leiste nach unten schieben
+  // (Header ist hier position:absolute, nicht fixed - Prinzip ist aber dasselbe)
+  const header = document.querySelector('header');
+
+  function updateOffset() {
+    const barHeight = wrapper.getBoundingClientRect().height;
+    if (header) header.style.top = barHeight + 'px';
+    document.body.style.paddingTop = barHeight + 'px';
+  }
+
   // Auf-/Zuklapp-Logik
   let isOpen = false;
 
@@ -54,14 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
       trigger.classList.remove('active');
       document.body.classList.remove('announcement-open');
     }
+
+    // Höhe ändert sich durch die CSS-Transition (max-height) erst nach und nach
+    updateOffset();
+    setTimeout(updateOffset, 550);
   }
 
+  updateOffset();
+  window.addEventListener('resize', updateOffset);
+
   trigger.addEventListener('click', (e) => {
-    if (e.target.classList.contains('close-button')) {
-      toggleAnnouncement(false);
-    } else {
-      toggleAnnouncement();
-    }
+    if (e.target.classList.contains('close-button')) return; // eigener Handler unten
+    toggleAnnouncement();
   });
 
   // Schließen bei Klick außerhalb
@@ -71,16 +89,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Zustand (offen/geschlossen) im localStorage merken
-  const STORAGE_KEY = 'announcement-state';
-
-  const savedState = localStorage.getItem(STORAGE_KEY);
-  if (savedState === 'closed') {
-    toggleAnnouncement(false);
-  }
-
+  // X: Leiste komplett und dauerhaft ausblenden (nicht nur den Inhalt zuklappen)
   const closeButton = wrapper.querySelector('.close-button');
   closeButton.addEventListener('click', () => {
     localStorage.setItem(STORAGE_KEY, 'closed');
+    wrapper.remove();
+    if (header) header.style.top = '';
+    document.body.style.paddingTop = '';
   });
 });
