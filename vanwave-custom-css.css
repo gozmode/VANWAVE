@@ -405,13 +405,9 @@
   display: none !important;
 }
 
-/* Platz für die offene Leiste schaffen */
+/* Platz für die Leiste schaffen (Höhe wird per JS dynamisch gesetzt) */
 body {
   transition: padding-top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-body.announcement-open {
-  padding-top: 200px; /* ggf. an Inhaltshöhe anpassen */
 }
 
 /* Original-Footer-Sektion (Quelle der Ankündigung) ausblenden */
