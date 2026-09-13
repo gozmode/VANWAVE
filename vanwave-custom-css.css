@@ -419,3 +419,39 @@ body {
 .original-footer-section {
   display: none !important;
 }
+
+/* =========================================================
+   13. SECTION SLIDER – FORTSCHRITTS-STRICHE (Alternative zu Bullets)
+   Aktivieren: dem Slider-Div zusätzlich data-render-bullet="progressBullet"
+   geben (siehe js/section-slider-progress-bullets.js). Die Füll-Dauer
+   richtet sich automatisch nach data-autoplay-timer des jeweiligen Sliders.
+   ========================================================= */
+.progress-bullet {
+  display: inline-block;
+  width: 40px;
+  height: 3px;
+  margin: 0 4px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bullet-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.swiper-pagination-bullet-active .progress-bullet-fill {
+  animation: wm-progress-fill var(--wm-slider-autoplay-duration, 4.5s) linear forwards;
+}
+
+@keyframes wm-progress-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
