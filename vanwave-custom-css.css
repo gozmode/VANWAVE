@@ -163,6 +163,14 @@
 }
 
 /* =========================================================
+   03a. PRODUKTDETAILSEITE – BREADCRUMB
+   ========================================================= */
+/* Verhindert doppelte Artikel-Nennung (Breadcrumb + H1 darunter) */
+.product-nav-breadcrumb-link:last-child {
+  display: none;
+}
+
+/* =========================================================
    04. PRODUKTDETAILSEITE – PREIS
    ========================================================= */
 .product-detail .product-price-value {
@@ -454,4 +462,39 @@ body {
 @keyframes wm-progress-fill {
   from { width: 0%; }
   to { width: 100%; }
+}
+
+/* =========================================================
+   14. WARENKORB (Cart-Seite)
+   ========================================================= */
+.cart-title {
+  display: block !important;
+  text-align: center !important;
+  font-size: 6rem !important;
+  font-weight: 600 !important;
+  padding: 80px !important;
+}
+
+/* Auf Mobile umbricht die volle H1-Größe (6rem) nicht schön, daher hier kleiner. */
+@media only screen and (max-width: 640px) {
+  .cart-title {
+    font-size: 66px !important;
+  }
+}
+
+/* Hinweistext bei leerem Warenkorb (echter Klassenname laut Live-DOM: .empty-message) */
+.empty-message {
+  text-align: center !important;
+  padding: 40px !important;
+}
+
+/* "Einkauf fortsetzen"-Button (Squarespace-Style-Hook: .cart-continue-button).
+   !important nötig, da Squarespaces eigene React-Klassen (sqs-button-element--secondary
+   u.a.) hier offenbar spezifischer/!important sind und unser display/margin sonst
+   überschreiben. */
+.cart-continue-button {
+  display: block !important;
+  width: fit-content !important;
+  margin: 0 auto !important;
+  margin-bottom: 40px !important;
 }
