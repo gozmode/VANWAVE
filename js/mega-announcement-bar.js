@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const trigger = document.createElement('div');
   trigger.className = 'announcement-trigger';
   trigger.innerHTML = `
-    Relaunch-Rabatt: 5% auf alles
+    RELAUNCH-RABATT: 5% auf alles
     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M19 9l-7 7-7-7"></path>
     </svg>
