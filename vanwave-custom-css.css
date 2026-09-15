@@ -177,7 +177,7 @@
   font-family: inherit !important;
   font-size: 2.5rem !important;
   font-weight: 600 !important;
-  color: #cc9933 !important;
+  color: #245955 !important;
 }
 /* MwSt.-Hinweis direkt unter dem Preis */
 .product-detail .product-price-value::after {
@@ -208,7 +208,7 @@
   margin-top: 15px !important;
   font-size: var(--price-font-size-summary) !important;
   font-weight: normal;
-  color: #888 !important;
+  color: #245955 !important;
 }
 /* Alter / durchgestrichener Preis */
 .summary-price .original-price {
@@ -223,7 +223,7 @@
 .product-list-item-price {
   font-size: var(--price-font-size-list) !important;
   font-weight: 300 !important;
-  color: #cc9933 !important;
+  color: #245955 !important;
 }
 
 /* =========================================================
@@ -306,7 +306,7 @@
 /* Add-on Produktpreis */
 .product-add-ons .add-on-details .product-price {
   font-size: 1.5rem !important;
-  color: #999 !important;
+  color: #245955 !important;
 }
 /* Add-to-Cart Button innerhalb der Add-ons */
 .product-add-ons .sqs-add-to-cart-button {
