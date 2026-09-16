@@ -19,11 +19,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Produktdetailseite: Tags stehen im globalen Squarespace-Kontext ---
-  const pdpItem = window.Static && window.Static.SQUARESPACE_CONTEXT && window.Static.SQUARESPACE_CONTEXT.item;
-  if (pdpItem && hasBundleTag(pdpItem.tags)) {
-    const detail = document.querySelector('.product-detail');
-    if (detail) detail.classList.add('bundle-product');
+  // --- Produktdetailseite: Tags über die JSON der aktuellen Seite holen
+  // (window.Static.SQUARESPACE_CONTEXT.item hat kein tags-Feld) ---
+  const detail = document.querySelector('.product-detail');
+  if (detail) {
+    fetch(location.pathname + '?format=json')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.item && hasBundleTag(data.item.tags)) {
+          detail.classList.add('bundle-product');
+        }
+      })
+      .catch(function () {});
   }
 
   // --- Summary-Blocks (Abschnitt 01c): Tags stehen direkt in der JSON
