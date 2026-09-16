@@ -147,13 +147,6 @@
 .product-detail.bundle-product .product-price-value {
   color: #2F6F6B !important;
 }
-/* ACHTUNG: Selector für den "alten" Preis auf der Produktdetailseite ist
-   noch ungetestet (im Repo gibt es dafür bisher kein Vorbild wie bei den
-   Summary-Blocks) - bitte live prüfen und mir die echte Klasse schicken,
-   falls das nicht greift. */
-.product-detail.bundle-product .product-price-value .original-price {
-  color: #fff !important;
-}
 
 /* =========================================================
    02. PRODUKTDETAILSEITE – RESTOCK-BEREICH
