@@ -33,11 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function () {});
   }
 
-  // --- Summary-Blocks (Abschnitt 01c): Tags stehen direkt in der JSON
-  // der aktuellen Seite (data.items[].tags) - ein Fetch reicht für alle. ---
+  // --- Summary-Blocks (Abschnitt 01c): Summary Blocks liegen oft auf
+  // einer eigenen Seite (z.B. /sale), ziehen ihre Produkte aber aus /shop -
+  // die Tags stehen also in der Shop-JSON, nicht in der der aktuellen Seite. ---
   const summaryItems = document.querySelectorAll('.summary-item');
   if (summaryItems.length) {
-    fetch(location.pathname + '?format=json')
+    fetch('/shop?format=json')
       .then(function (res) { return res.json(); })
       .then(function (data) {
         const items = data.items || [];
