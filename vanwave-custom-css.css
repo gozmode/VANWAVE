@@ -22,9 +22,11 @@
 /* Gemeinsame Typografie aller Badges */
 .product-status .product-mark.sold-out,
 .summary-product-status.custom-sale-badge,
+.summary-product-status.custom-bundle-badge,
 .summary-product-status .product-mark.sold-out,
 .product-list-item .product-mark,
-.product-detail.on-sale .pdp-gallery::after {
+.product-detail.on-sale .pdp-gallery::after,
+.product-detail.bundle-product .pdp-gallery::after {
   font-family: rama-gothic-e !important;
   font-size: 2.2rem !important;
   font-weight: bold !important;
@@ -99,6 +101,47 @@
 .product-list-item .product-mark.sold-out {
   color: red !important;
   background: #fff !important;
+}
+
+/* --- 01e. BUNDLE-Badge (ersetzt SALE-Badge bei Produkt-Tag "BUNDLE") ---
+   Wird per js/bundle-badge.js gesteuert: das Skript liest den Tag pro
+   Produkt aus und setzt die Klasse .bundle-product. Gleiche Spezifität
+   wie die SALE-Regeln oben, gewinnt aber durch die spätere Position im
+   Stylesheet, sobald .bundle-product gesetzt ist. */
+.summary-product-status.custom-bundle-badge {
+  color: #fff !important;
+  background: #2F6F6B !important;
+}
+.summary-item.bundle-product .summary-price .product-price {
+  color: #2F6F6B !important;
+}
+.summary-item.bundle-product .summary-price .original-price {
+  color: #fff !important;
+}
+
+.product-detail.bundle-product .pdp-gallery {
+  position: relative;
+}
+.product-detail.bundle-product .pdp-gallery::after {
+  content: 'BUNDLE';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  display: block;
+  color: #fff;
+  background: #2F6F6B;
+  pointer-events: none;
+}
+.product-detail.bundle-product .product-price-value {
+  color: #2F6F6B !important;
+}
+/* ACHTUNG: Selector für den "alten" Preis auf der Produktdetailseite ist
+   noch ungetestet (im Repo gibt es dafür bisher kein Vorbild wie bei den
+   Summary-Blocks) - bitte live prüfen und mir die echte Klasse schicken,
+   falls das nicht greift. */
+.product-detail.bundle-product .product-price-value .original-price {
+  color: #fff !important;
 }
 
 /* =========================================================
