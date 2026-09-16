@@ -272,6 +272,12 @@
   font-weight: 600 !important;
   color: #245955 !important;
 }
+.product-list-item-price .sale-price {
+  color: red !important;
+}
+.product-list-item-price .original-price {
+  color: #fff !important;
+}
 
 /* =========================================================
    08. SHOP ITEM – CUSTOM ACCORDION
