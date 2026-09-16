@@ -119,6 +119,11 @@
   color: #fff !important;
 }
 
+.product-list-item.bundle-product .product-mark.sale {
+  color: #fff !important;
+  background: #2F6F6B !important;
+}
+
 .product-detail.bundle-product .pdp-gallery {
   position: relative;
 }
