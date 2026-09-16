@@ -265,6 +265,7 @@
   font-family: rama-gothic-e !important;
   font-size: var(--price-font-size-summary) !important;
   font-weight: 600 !important;
+  color: var(--paragraphMediumColor) !important;
 }
 /* Alter / durchgestrichener Preis */
 .summary-price .original-price {
