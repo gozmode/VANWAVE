@@ -123,6 +123,12 @@
   color: #fff !important;
   background: #2F6F6B !important;
 }
+.product-list-item.bundle-product .sale-price {
+  color: #2F6F6B !important;
+}
+.product-list-item.bundle-product .original-price {
+  color: #fff !important;
+}
 
 .product-detail.bundle-product .pdp-gallery {
   position: relative;
