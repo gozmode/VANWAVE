@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 07.09.2026
+   Stand: 16.09.2026
    ========================================================= */
 
 /* =========================================================
@@ -239,23 +239,30 @@
 /* =========================================================
    05. SUMMARY BLOCK – PRODUKTTITEL
    ========================================================= */
+/* Werte 1:1 von der nativen Produktkachel auf /shop (.product-list-item-title)
+   übernommen, damit die Typografie sitehweit identisch wirkt. Keine feste
+   Farbe - die passt sich wie bei Squarespace nativ automatisch an den
+   Section-Hintergrund an. */
 .summary-title {
   margin-top: 5px !important;
   font-family: rama-gothic-e;
-  font-size: 1.8rem !important;
+  font-size: 2.23rem !important;
   font-style: normal !important;
   font-weight: 600 !important;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 /* =========================================================
    06. SUMMARY BLOCK – PREISE
    ========================================================= */
-/* Aktueller Preis */
+/* Aktueller Preis - Größe/Schnitt wie /shop, Farbe bewusst nicht fest
+   gesetzt, damit sie sich je nach Section-Hintergrund automatisch anpasst. */
 .summary-price .product-price {
   margin-top: 15px !important;
   font-size: var(--price-font-size-summary) !important;
   font-weight: normal;
-  color: #245955 !important;
 }
 /* Alter / durchgestrichener Preis */
 .summary-price .original-price {
