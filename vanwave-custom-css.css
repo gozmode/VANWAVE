@@ -221,8 +221,8 @@
    07. SHOP-ÜBERSICHT – PRODUKTPREISE
    ========================================================= */
 .product-list-item-price {
-  font-size: var(--price-font-size-list) !important;
-  font-weight: 300 !important;
+  font-size: 2.0rem !important;
+  font-weight: 600 !important;
   color: #245955 !important;
 }
 
