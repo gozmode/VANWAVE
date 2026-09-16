@@ -249,20 +249,22 @@
   font-size: 2.23rem !important;
   font-style: normal !important;
   font-weight: 600 !important;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  line-height: 1;
+  letter-spacing: -0.03em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
 }
 
 /* =========================================================
    06. SUMMARY BLOCK – PREISE
    ========================================================= */
-/* Aktueller Preis - Größe/Schnitt wie /shop, Farbe bewusst nicht fest
-   gesetzt, damit sie sich je nach Section-Hintergrund automatisch anpasst. */
+/* Aktueller Preis - Schriftart/-stärke wie /shop (dort nativ rama-gothic-e/600,
+   hier ohne Override eigentlich "Open Sans"/400 - deshalb explizit gesetzt).
+   Farbe bewusst nicht fest, passt sich an den Section-Hintergrund an. */
 .summary-price .product-price {
   margin-top: 15px !important;
+  font-family: rama-gothic-e !important;
   font-size: var(--price-font-size-summary) !important;
-  font-weight: normal;
+  font-weight: 600 !important;
 }
 /* Alter / durchgestrichener Preis */
 .summary-price .original-price {
