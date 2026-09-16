@@ -19,17 +19,28 @@ document.addEventListener('DOMContentLoaded', function () {
     if (detail) detail.classList.add('bundle-product');
   }
 
-  // --- Summary-Blocks (Abschnitt 01c): Tags über die JSON-Daten der
-  // verlinkten Produktseite holen, da sie im DOM nicht direkt stehen ---
-  document.querySelectorAll('.summary-item').forEach(function (item) {
-    const link = item.querySelector('a[href]');
-    if (!link) return;
+  // --- Summary-Blocks (Abschnitt 01c): Tags stehen direkt in der JSON
+  // der aktuellen Seite (data.items[].tags) - ein Fetch reicht für alle. ---
+  const summaryItems = document.querySelectorAll('.summary-item');
+  if (!summaryItems.length) return;
 
-    fetch(link.getAttribute('href') + '?format=json')
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        const tags = data.item && data.item.tags;
-        if (!hasBundleTag(tags)) return;
+  fetch(location.pathname + '?format=json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      const items = data.items || [];
+      const bundleUrls = new Set(
+        items
+          .filter(function (i) { return hasBundleTag(i.tags); })
+          .map(function (i) { return i.fullUrl || i.url; })
+          .filter(Boolean)
+      );
+      if (!bundleUrls.size) return;
+
+      summaryItems.forEach(function (item) {
+        const link = item.querySelector('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href').split('?')[0];
+        if (!bundleUrls.has(href)) return;
 
         item.classList.add('bundle-product');
         const status = item.querySelector('.summary-product-status');
@@ -38,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
           status.classList.remove('custom-sale-badge');
           status.classList.add('custom-bundle-badge');
         }
-      })
-      .catch(function () {});
-  });
+      });
+    })
+    .catch(function () {});
 });
