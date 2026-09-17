@@ -573,6 +573,10 @@ body {
 /* --- Konto: Text bleibt für Screenreader, wird aber visuell durch ein
    Personen-Icon ersetzt (nur Desktop - mobil bleibt Text wie bisher) --- */
 @media only screen and (min-width: 641px) {
+  .user-accounts-link {
+    display: flex !important;
+    align-items: center;
+  }
   .user-accounts-text-link {
     display: inline-flex !important;
     align-items: center;
