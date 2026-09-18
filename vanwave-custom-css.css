@@ -414,6 +414,13 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/* Squarespaces eigene Overlays (z.B. mobiles Menü, "header--menu-open") laufen
+   mit sehr niedrigem z-index (~1) - unsere Bar (999999) legt sich sonst über
+   deren oberen Bereich. Hier sinkt die Bar hinter das Overlay zurück. */
+body.header--menu-open .announcement-bar-wrapper {
+  z-index: 1;
+}
+
 .announcement-trigger {
   background: #245955;
   color: #000;
@@ -643,4 +650,17 @@ body {
   background-color: currentColor;
   -webkit-mask: var(--search-icon-mask) center / contain no-repeat;
   mask: var(--search-icon-mask) center / contain no-repeat;
+}
+
+/* =========================================================
+   16. WARENKORB-POPUP ("Zum Warenkorb hinzugefügt!") – BUTTON-GRÖSSE
+   Eigene Commerce-Komponente (nicht die normalen Squarespace-Button-
+   Klassen) - Site Styles' Button-Größenregler greifen hier nicht,
+   daher fest per CSS.
+   ========================================================= */
+.commerce-mini-cart-view-cart-button,
+.commerce-mini-cart-checkout-button {
+  padding: 16px 24px !important;
+  font-size: 1rem !important;
+  min-height: 52px !important;
 }
