@@ -421,6 +421,12 @@ body.header--menu-open .announcement-bar-wrapper {
   z-index: 1;
 }
 
+/* Konto-Flyout läuft als #accountFrame (Iframe) mit z-index 20002 -
+   unsere Bar sinkt zurück, sobald dieser Frame im DOM ist. */
+body:has(#accountFrame) .announcement-bar-wrapper {
+  z-index: 1;
+}
+
 .announcement-trigger {
   background: #245955;
   color: #000;
