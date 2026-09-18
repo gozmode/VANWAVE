@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 16.09.2026
+   Stand: 18.09.2026
    ========================================================= */
 
 /* =========================================================
@@ -534,28 +534,31 @@ body {
    auf der Warenkorb-Seite ("Warenkorb", "Übersicht", "Kunden kauften auch") -
    alle mit identischen, zufällig generierten Zusatzklassen. Einzig das
    aria-label ist stabil und eindeutig unterscheidbar.
-   Standard: klein (Absatz 2, fett) - passt für "Übersicht" & "Kunden kauften auch". */
+   Standard: groß (gilt für "Warenkorb" & "Kunden kauften auch"). */
 .cart-title {
   display: block !important;
-  text-align: left !important;
-  font: var(--paragraph-2-font) !important;
-  font-weight: 700 !important;
-  padding: 0 !important;
-}
-
-/* Ausnahme: der echte Haupttitel "Warenkorb" bleibt groß & zentriert */
-.cart-title[aria-label="Warenkorb"] {
   text-align: center !important;
   font-size: 6rem !important;
   font-weight: 600 !important;
+  line-height: 1.1 !important;
   padding: 80px !important;
 }
 
 /* Auf Mobile umbricht die volle Größe (6rem) nicht schön, daher hier kleiner. */
 @media only screen and (max-width: 640px) {
-  .cart-title[aria-label="Warenkorb"] {
+  .cart-title {
     font-size: 66px !important;
   }
+}
+
+/* Ausnahme: "Übersicht" (rechte Spalte, Desktop) bleibt klein, da sie sonst
+   mit der Zusammenfassung überlappt. */
+.cart-title[aria-label="Übersicht"] {
+  text-align: left !important;
+  font: var(--paragraph-2-font) !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  padding: 0 !important;
 }
 
 /* Hinweistext bei leerem Warenkorb (echter Klassenname laut Live-DOM: .empty-message) */
