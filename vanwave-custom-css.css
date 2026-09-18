@@ -530,17 +530,30 @@ body {
 /* =========================================================
    14. WARENKORB (Cart-Seite)
    ========================================================= */
+/* Squarespace nutzt class="cart-title" für DREI verschiedene Überschriften
+   auf der Warenkorb-Seite ("Warenkorb", "Übersicht", "Kunden kauften auch") -
+   alle mit identischen, zufällig generierten Zusatzklassen. Einzig das
+   aria-label ist stabil und eindeutig unterscheidbar.
+   Standard: klein (Absatz 2, fett) - passt für "Übersicht" & "Kunden kauften auch". */
 .cart-title {
   display: block !important;
+  text-align: left !important;
+  font: var(--paragraph-2-font) !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+}
+
+/* Ausnahme: der echte Haupttitel "Warenkorb" bleibt groß & zentriert */
+.cart-title[aria-label="Warenkorb"] {
   text-align: center !important;
   font-size: 6rem !important;
   font-weight: 600 !important;
   padding: 80px !important;
 }
 
-/* Auf Mobile umbricht die volle H1-Größe (6rem) nicht schön, daher hier kleiner. */
+/* Auf Mobile umbricht die volle Größe (6rem) nicht schön, daher hier kleiner. */
 @media only screen and (max-width: 640px) {
-  .cart-title {
+  .cart-title[aria-label="Warenkorb"] {
     font-size: 66px !important;
   }
 }
