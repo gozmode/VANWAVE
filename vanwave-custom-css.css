@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 18.09.2026
+   Stand: 20.09.2026
    ========================================================= */
 
 /* =========================================================
@@ -23,10 +23,12 @@
 .product-status .product-mark.sold-out,
 .summary-product-status.custom-sale-badge,
 .summary-product-status.custom-bundle-badge,
+.summary-product-status.custom-refurb-badge,
 .summary-product-status .product-mark.sold-out,
 .product-list-item .product-mark,
 .product-detail.on-sale .pdp-gallery::after,
-.product-detail.bundle-product .pdp-gallery::after {
+.product-detail.bundle-product .pdp-gallery::after,
+.product-detail.refurbished-product .pdp-gallery::after {
   font-family: rama-gothic-e !important;
   font-size: 2.2rem !important;
   font-weight: bold !important;
@@ -280,7 +282,7 @@
 .product-list-item-price {
   font-size: 2.0rem !important;
   font-weight: 600 !important;
-  color: #245955 !important;
+  color: #3a8a85 !important;
 }
 .product-list-item-price .sale-price {
   color: red !important;
@@ -669,4 +671,77 @@ body {
   padding: 16px 24px !important;
   font-size: 1rem !important;
   min-height: 52px !important;
+}
+
+/* =========================================================
+   17. REFURBISHED (Badge, Zustandsbox)
+   Aktiv bei Produkten mit dem Tag "REFURBISHED" (js/refurbished.js).
+   Badge: weiß mit grüner Schrift, ersetzt das SALE-Badge (Produktseite,
+   Shop-Grid, Summary-Blocks). Zustandsbox = erster Zitat-Block in der
+   Produktbeschreibung, Zeilen im Format "Funktion: Text".
+   ========================================================= */
+.product-detail.refurbished-product .pdp-gallery {
+  position: relative;
+}
+.product-detail.refurbished-product .pdp-gallery::after {
+  content: 'REFURBISHED';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  display: block;
+  color: #3a8a85;
+  background: #fff;
+  pointer-events: none;
+}
+
+.summary-product-status.custom-refurb-badge {
+  color: #3a8a85 !important;
+  background: #fff !important;
+}
+.product-list-item.refurbished-product .product-mark.sale {
+  color: #3a8a85 !important;
+  background: #fff !important;
+}
+
+.refurb-badges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+}
+.refurb-badge {
+  color: #3a8a85;
+  border: 1px solid #3a8a85;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.refurbished-product blockquote.refurb-box {
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-left: 4px solid #3a8a85;
+  background: rgba(128, 128, 128, 0.12);
+  padding: 14px 16px;
+  margin: 16px 0;
+  font-style: normal;
+}
+.refurb-box .refurb-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #3a8a85;
+  margin-bottom: 10px;
+}
+.refurb-box .refurb-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.refurb-box .refurb-grid span:nth-child(odd) {
+  opacity: 0.65;
 }
