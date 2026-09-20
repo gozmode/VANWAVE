@@ -16,6 +16,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function buildConditionBox(quote) {
+    if (!quote || quote.classList.contains('refurb-box')) return;
+    quote.classList.add('refurb-box');
+
+    const heading = document.createElement('div');
+    heading.className = 'refurb-title';
+    heading.textContent = 'ZUSTAND DIESES ARTIKELS';
+
+    const grid = document.createElement('div');
+    grid.className = 'refurb-grid';
+    quote.querySelectorAll('p').forEach(function (p) {
+      const text = p.textContent.trim();
+      if (!text) return;
+      const idx = text.indexOf(':');
+      const label = document.createElement('span');
+      const value = document.createElement('span');
+      if (idx > 0 && idx < 25) {
+        label.textContent = text.slice(0, idx).trim();
+        value.textContent = text.slice(idx + 1).trim();
+      } else {
+        value.textContent = text;
+      }
+      grid.appendChild(label);
+      grid.appendChild(value);
+    });
+
+    quote.textContent = '';
+    quote.appendChild(heading);
+    quote.appendChild(grid);
+  }
+
   // --- Produktdetailseite ---
   const detail = document.querySelector('.product-detail');
   if (detail) {
@@ -34,35 +65,13 @@ document.addEventListener('DOMContentLoaded', function () {
           title.parentNode.insertBefore(badges, title);
         }
 
-        const quote = detail.querySelector('blockquote');
-        if (!quote || quote.classList.contains('refurb-box')) return;
-        quote.classList.add('refurb-box');
-
-        const heading = document.createElement('div');
-        heading.className = 'refurb-title';
-        heading.textContent = 'ZUSTAND DIESES ARTIKELS';
-
-        const grid = document.createElement('div');
-        grid.className = 'refurb-grid';
-        quote.querySelectorAll('p').forEach(function (p) {
-          const text = p.textContent.trim();
-          if (!text) return;
-          const idx = text.indexOf(':');
-          const label = document.createElement('span');
-          const value = document.createElement('span');
-          if (idx > 0 && idx < 25) {
-            label.textContent = text.slice(0, idx).trim();
-            value.textContent = text.slice(idx + 1).trim();
-          } else {
-            value.textContent = text;
-          }
-          grid.appendChild(label);
-          grid.appendChild(value);
-        });
-
-        quote.textContent = '';
-        quote.appendChild(heading);
-        quote.appendChild(grid);
+        // Squarespace rendert die Beschreibung doppelt (Desktop und Mobil) -
+        // deshalb in jeder .product-description das erste Zitat umbauen.
+        const descriptions = detail.querySelectorAll('.product-description');
+        const quotes = descriptions.length
+          ? Array.from(descriptions).map(function (d) { return d.querySelector('blockquote'); })
+          : [detail.querySelector('blockquote')];
+        quotes.forEach(buildConditionBox);
       })
       .catch(function () {});
   }
