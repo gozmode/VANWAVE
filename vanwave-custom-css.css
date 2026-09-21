@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 20.09.2026
+   Stand: 21.09.2026
    ========================================================= */
 
 /* =========================================================
@@ -230,7 +230,7 @@
 }
 /* MwSt.-Hinweis direkt unter dem Preis */
 .product-detail .product-price-value::after {
-  content: "inkl. MwSt., zzgl. Versand";
+  content: "inkl. MwSt., zzgl. Versand (wird beim Checkout berechnet)";
   display: block;
   font-size: 0.75rem;
   font-weight: normal;
@@ -712,7 +712,8 @@ body {
   margin: 0 0 12px;
 }
 .refurb-badge {
-  color: #3a8a85;
+  color: #fff;
+  background: #3a8a85;
   border: 1px solid #3a8a85;
   font-size: 12px;
   letter-spacing: 0.06em;
