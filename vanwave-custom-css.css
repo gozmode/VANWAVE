@@ -14,6 +14,12 @@
 :root {
   --price-font-size-summary: 2rem;
   --price-font-size-list: 2rem;
+  --price-font-size-detail: 2.5rem;
+  --price-font-size-addon: 2rem;
+  --price-font-strike: "Open Sans", sans-serif;
+  --price-font-size-strike: 0.67em;
+  --price-color: #3a8a85;
+  --price-color-strike: #d62828;
 }
 
 /* =========================================================
@@ -118,7 +124,7 @@
   color: #2F6F6B !important;
 }
 .summary-item.bundle-product .summary-price .original-price {
-  color: #fff !important;
+  color: var(--price-color-strike) !important;
 }
 
 .product-list-item.bundle-product .product-mark.sale {
@@ -129,7 +135,7 @@
   color: #2F6F6B !important;
 }
 .product-list-item.bundle-product .original-price {
-  color: #fff !important;
+  color: var(--price-color-strike) !important;
 }
 
 .product-detail.bundle-product .pdp-gallery {
@@ -146,7 +152,8 @@
   background: #2F6F6B;
   pointer-events: none;
 }
-.product-detail.bundle-product .product-price-value {
+.product-detail.bundle-product .product-price-value,
+.product-detail.bundle-product .product-price-value .sale-price {
   color: #2F6F6B !important;
 }
 
@@ -222,16 +229,29 @@
 /* =========================================================
    04. PRODUKTDETAILSEITE – PREIS
    ========================================================= */
+/* Preis-Formatierung wie im Shop-Grid (Abschnitt 07): rama-gothic-e / 600,
+   Normalpreis Teal, reduzierter Preis rot, Streichpreis in Textfarbe des
+   Section-Themes (hell auf dunklem, dunkel auf hellem Grund) und gleich groß. */
 .product-detail .product-price-value {
-  font-family: inherit !important;
-  font-size: 2.5rem !important;
+  font-family: rama-gothic-e !important;
+  font-size: var(--price-font-size-detail) !important;
   font-weight: 600 !important;
-  color: #245955 !important;
+  color: var(--price-color) !important;
 }
-/* MwSt.-Hinweis direkt unter dem Preis */
+.product-detail .product-price-value .sale-price {
+  color: var(--price-color) !important;
+}
+.product-detail .product-price-value .original-price {
+  font-family: var(--price-font-strike) !important;
+  color: var(--price-color-strike) !important;
+  font-size: var(--price-font-size-strike) !important;
+  font-weight: 400 !important;
+}
+/* MwSt.-Hinweis direkt unter dem Preis (bewusst Fließtextschrift, nicht die Preisschrift) */
 .product-detail .product-price-value::after {
   content: "inkl. MwSt., zzgl. Versand (wird beim Checkout berechnet)";
   display: block;
+  font-family: "Open Sans", sans-serif;
   font-size: 0.75rem;
   font-weight: normal;
   color: #666;
@@ -259,36 +279,40 @@
 /* =========================================================
    06. SUMMARY BLOCK – PREISE
    ========================================================= */
-/* Aktueller Preis - Schriftart/-stärke wie /shop (dort nativ rama-gothic-e/600,
-   hier ohne Override eigentlich "Open Sans"/400 - deshalb explizit gesetzt).
-   Farbe bewusst nicht fest, passt sich an den Section-Hintergrund an. */
+/* Preis-Formatierung wie /shop (Abschnitt 07): rama-gothic-e / 600, aktueller
+   Preis immer Teal (auch bei reduzierten Produkten, anders als im Shop-Grid).
+   Der Streichpreis steht in Open Sans, Textfarbe des Section-Themes (hell auf
+   dunklem, dunkel auf hellem Grund) und gleich groß wie der aktuelle Preis. */
 .summary-price .product-price {
   margin-top: 15px !important;
   font-family: rama-gothic-e !important;
   font-size: var(--price-font-size-summary) !important;
   font-weight: 600 !important;
-  color: var(--paragraphMediumColor) !important;
+  color: var(--price-color) !important;
 }
-/* Alter / durchgestrichener Preis */
 .summary-price .original-price {
-  font-size: 1rem;
-  font-weight: normal;
-  color: red !important;
+  font-family: var(--price-font-strike) !important;
+  font-size: var(--price-font-size-strike) !important;
+  font-weight: 400 !important;
+  color: var(--price-color-strike) !important;
 }
 
 /* =========================================================
    07. SHOP-ÜBERSICHT – PRODUKTPREISE
    ========================================================= */
 .product-list-item-price {
-  font-size: 2.0rem !important;
+  font-size: var(--price-font-size-list) !important;
   font-weight: 600 !important;
-  color: #3a8a85 !important;
+  color: var(--price-color) !important;
 }
 .product-list-item-price .sale-price {
-  color: red !important;
+  color: var(--price-color) !important;
 }
 .product-list-item-price .original-price {
-  color: #fff !important;
+  font-family: var(--price-font-strike) !important;
+  font-size: var(--price-font-size-strike) !important;
+  font-weight: 400 !important;
+  color: var(--price-color-strike) !important;
 }
 
 /* =========================================================
@@ -370,8 +394,19 @@
 }
 /* Add-on Produktpreis */
 .product-add-ons .add-on-details .product-price {
-  font-size: 1.5rem !important;
-  color: #245955 !important;
+  font-family: rama-gothic-e !important;
+  font-size: var(--price-font-size-addon) !important;
+  font-weight: 600 !important;
+  color: var(--price-color) !important;
+}
+.product-add-ons .add-on-details .product-price .sale-price {
+  color: var(--price-color) !important;
+}
+.product-add-ons .add-on-details .product-price .original-price {
+  font-family: var(--price-font-strike) !important;
+  color: var(--price-color-strike) !important;
+  font-size: var(--price-font-size-strike) !important;
+  font-weight: 400 !important;
 }
 /* Add-to-Cart Button innerhalb der Add-ons */
 .product-add-ons .sqs-add-to-cart-button {
@@ -721,12 +756,22 @@ body {
   border-radius: 4px;
 }
 
+/* Abstand der Infoboxen (Zustandsbox und "Kompatibel mit") zum rechten Rand der
+   Textspalte - nur am Desktop, am Handy bleibt die volle Breite. */
+:root {
+  --info-box-margin-right: 0px;
+}
+@media (min-width: 768px) {
+  :root {
+    --info-box-margin-right: 40px;
+  }
+}
 .refurbished-product blockquote.refurb-box {
   border: 1px solid rgba(128, 128, 128, 0.35);
   border-left: 4px solid #3a8a85;
   background: rgba(128, 128, 128, 0.12);
   padding: 14px 16px;
-  margin: 16px 0;
+  margin: 16px var(--info-box-margin-right) 16px 0;
   font-style: normal;
 }
 .refurb-box .refurb-title {
@@ -756,11 +801,11 @@ body {
    ========================================================= */
 .product-description p:has(> em:only-child) {
   display: block !important;
-  background: #202322 !important;
+  background: #343837 !important;
   border-left: 4px solid #b9a082 !important;
   border-radius: 0 !important;
   padding: 14px 16px !important;
-  margin: 16px 0 !important;
+  margin: 16px var(--info-box-margin-right) 16px 0 !important;
 }
 .product-description p:has(> em:only-child)::before {
   content: "KOMPATIBEL MIT:";
