@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 21.09.2026
+   Stand: 24.09.2026
    ========================================================= */
 
 /* =========================================================
@@ -745,4 +745,34 @@ body {
 }
 .refurb-box .refurb-grid span:nth-child(odd) {
   opacity: 0.65;
+}
+
+/* =========================================================
+   18. PRODUKTBESCHREIBUNG – "KOMPATIBEL MIT"-BOX
+   Ein Absatz in der Produktbeschreibung, der komplett kursiv
+   formatiert ist (ganzen Absatz markieren, Kursiv-Button klicken),
+   wird zu einer Box mit fester Überschrift "KOMPATIBEL MIT:".
+   Erkennungsmerkmal: <p>, dessen einziges Kind ein <em> ist.
+   ========================================================= */
+.product-description p:has(> em:only-child) {
+  display: block !important;
+  background: #202322 !important;
+  border-left: 4px solid #b9a082 !important;
+  border-radius: 0 !important;
+  padding: 14px 16px !important;
+  margin: 16px 0 !important;
+}
+.product-description p:has(> em:only-child)::before {
+  content: "KOMPATIBEL MIT:";
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #b9a082;
+  margin-bottom: 6px;
+}
+.product-description p:has(> em:only-child) em {
+  font-style: normal !important;
+  color: #fff !important;
 }

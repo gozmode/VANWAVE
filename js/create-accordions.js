@@ -19,7 +19,8 @@ function createAccordion(selector = '.ProductItem-details-excerpt') {
     let sectionContent = [];
     let introContent = [];
 
-    // Process all child elements
+    // Process all child elements (Elemente statt HTML-Strings sammeln, damit sich
+    // Abschluss-Boxen am Ende noch anhand ihres Tags erkennen und heraustrennen lassen)
     Array.from(container.children).forEach((element, index, array) => {
       if (element.tagName === 'H1') {
         if (currentSection) {
@@ -31,8 +32,8 @@ function createAccordion(selector = '.ProductItem-details-excerpt') {
         currentSection = element.textContent;
         sectionContent = [];
       } else if (currentSection) {
-        sectionContent.push(element.outerHTML);
-        
+        sectionContent.push(element);
+
         if (index === array.length - 1) {
           accordionContent.push({
             title: currentSection,
@@ -47,6 +48,22 @@ function createAccordion(selector = '.ProductItem-details-excerpt') {
     if (accordionContent.length === 0) {
       console.warn(`No accordion sections found to process in container at index ${containerIndex}`);
       return;
+    }
+
+    // Abschluss-Boxen (Zustandsbox als Zitat-Block, "Kompatibel mit" als rein kursiver
+    // Absatz) sollen immer sichtbar nach dem Akkordeon stehen: vom Ende des letzten
+    // Abschnitts alle zusammenhängenden Box-Elemente abtrennen.
+    function isClosingBox(el) {
+      if (el.tagName === 'BLOCKQUOTE') return true;
+      if (el.tagName === 'P' && el.children.length === 1 &&
+          (el.children[0].tagName === 'EM' || el.children[0].tagName === 'STRONG')) return true;
+      return false;
+    }
+
+    const outroContent = [];
+    const lastSection = accordionContent[accordionContent.length - 1];
+    while (lastSection.content.length > 0 && isClosingBox(lastSection.content[lastSection.content.length - 1])) {
+      outroContent.unshift(lastSection.content.pop());
     }
 
     try {
@@ -85,7 +102,7 @@ function createAccordion(selector = '.ProductItem-details-excerpt') {
         content.setAttribute('role', 'region');
         content.setAttribute('aria-labelledby', `accordion-trigger-${containerIndex}-${index}`);
         content.hidden = true;
-        content.innerHTML = section.content.join('');
+        content.innerHTML = section.content.map((el) => el.outerHTML).join('');
 
         // Add click handler directly to this button
         button.addEventListener('click', () => {
@@ -102,6 +119,7 @@ function createAccordion(selector = '.ProductItem-details-excerpt') {
       });
 
       wrapper.appendChild(accordionContainer);
+      outroContent.forEach((el) => wrapper.appendChild(el));
 
       // Replace container contents
       container.innerHTML = '';
