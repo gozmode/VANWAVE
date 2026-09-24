@@ -114,8 +114,16 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(location.pathname + '?format=json')
       .then(function (res) { return res.json(); })
       .then(function (data) {
+        // Auf Produktseiten (z.B. "Das könnte dir auch gefallen") liefert die eigene
+        // JSON nur das eine Produkt (item), keine items - dann die Shop-JSON nehmen.
+        if (Array.isArray(data.items)) return data.items;
+        return fetch('/shop?format=json')
+          .then(function (res) { return res.json(); })
+          .then(function (shop) { return shop.items || []; });
+      })
+      .then(function (items) {
         const ids = new Set(
-          (data.items || []).filter(function (i) { return hasTag(i.tags); }).map(function (i) { return i.id; })
+          items.filter(function (i) { return hasTag(i.tags); }).map(function (i) { return i.id; })
         );
         if (!ids.size) return;
 

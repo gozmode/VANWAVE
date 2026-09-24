@@ -76,7 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(location.pathname + '?format=json')
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        const items = data.items || [];
+        // Auf Produktseiten (z.B. "Das könnte dir auch gefallen") liefert die eigene
+        // JSON nur das eine Produkt (item), keine items - dann die Shop-JSON nehmen.
+        if (Array.isArray(data.items)) return data.items;
+        return fetch('/shop?format=json')
+          .then(function (res) { return res.json(); })
+          .then(function (shop) { return shop.items || []; });
+      })
+      .then(function (items) {
         const bundleIds = new Set(
           items.filter(function (i) { return hasBundleTag(i.tags); }).map(function (i) { return i.id; })
         );
