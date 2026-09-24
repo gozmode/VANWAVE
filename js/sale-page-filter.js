@@ -1,7 +1,13 @@
-// Zeigt auf der /sale-Seite nur Produkte, die aktuell wirklich im Sale sind
-// (variants[].onSale aus der Shop-JSON), da Squarespace Summary Blocks
-// nicht nach "gerade reduziert" filtern können (nur nach Tag/Kategorie).
-// Läuft nur auf /sale, auch wenn versehentlich sitewide eingebunden.
+// Zeigt auf der /sale-Seite nur Produkte, die aktuell wirklich reduziert sind,
+// da Squarespace Summary Blocks nicht nach "gerade reduziert" filtern können
+// (nur nach Tag/Kategorie). Läuft nur auf /sale, auch wenn versehentlich
+// sitewide eingebunden.
+//
+// WICHTIG: variants[].onSale aus der Shop-JSON ist dafür NICHT zuverlässig -
+// bei manchen Produkten steht dort false, obwohl ein niedrigerer Verkaufspreis
+// gesetzt ist und die Seite selbst (Badges, Streichpreis) das Produkt normal
+// als reduziert anzeigt. Deshalb wie der Rest der Seite direkt salePrice vs.
+// price vergleichen, statt dem onSale-Feld zu vertrauen.
 
 document.addEventListener('DOMContentLoaded', function () {
   if (location.pathname !== '/sale') return;
@@ -15,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const onSaleUrls = new Set(
         (data.items || [])
           .filter(function (i) {
-            return Array.isArray(i.variants) && i.variants.some(function (v) { return v.onSale; });
+            return Array.isArray(i.variants) && i.variants.some(function (v) {
+              return v.salePrice > 0 && v.salePrice < v.price;
+            });
           })
           .map(function (i) { return i.fullUrl; })
       );
