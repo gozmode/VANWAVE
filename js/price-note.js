@@ -3,7 +3,7 @@
 // Link ist in ::after nicht möglich. Sobald dieses Script den echten Hinweis
 // einfügt, blendet .has-price-note den ::after-Text aus.
 // Linkziel hier ändern:
-const SHIPPING_URL = 'https://vanwave.squarespace.com/agb';
+const SHIPPING_URL = 'https://vanwave.squarespace.com/versand';
 
 document.addEventListener('DOMContentLoaded', function () {
   const detail = document.querySelector('.product-detail');
