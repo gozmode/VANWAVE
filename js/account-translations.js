@@ -80,34 +80,70 @@
 
   let currentFrame = null;
   let currentDocument = null;
+  let currentObserver = null;
+  let translating = false;
+  let scheduled = false;
 
+  // Das Kundenkonto ist eine React-App. Wenn wir Textknoten genau in dem
+  // Moment ändern, in dem React selbst gerade DOM-Elemente ein-/ausbaut
+  // (z.B. beim Wechsel von der Bestellliste in eine einzelne Bestellung),
+  // kann React "seine" Knoten nicht mehr wiederfinden und die Seite hängt
+  // sich auf. Zwei Gegenmaßnahmen:
+  //  1. translate() läuft nie synchron aus dem MutationObserver heraus,
+  //     sondern gebündelt einmal pro Frame (requestAnimationFrame) - React
+  //     hat seinen eigenen DOM-Umbau dann bereits abgeschlossen.
+  //  2. Während translate() selbst schreibt, ignoriert der Observer die
+  //     dadurch entstehenden Mutations (sonst reagiert er auf seine eigenen
+  //     Änderungen und läuft dauerhaft weiter).
   function translate(root) {
     if (!root) return;
 
-    const walker = root.ownerDocument.createTreeWalker(root, 4);
-    const nodes = [];
+    translating = true;
+    try {
+      const walker = root.ownerDocument.createTreeWalker(root, 4);
+      const nodes = [];
 
-    while (walker.nextNode()) nodes.push(walker.currentNode);
+      while (walker.nextNode()) nodes.push(walker.currentNode);
 
-    nodes.forEach((node) => {
-      const original = node.nodeValue;
-      const trimmed = original.trim();
-      let replacement = translations[trimmed];
+      nodes.forEach((node) => {
+        try {
+          const original = node.nodeValue;
+          const trimmed = original.trim();
+          let replacement = translations[trimmed];
 
-      if (!replacement) {
-        replacement = trimmed.replace(/^Hi,\s*/i, 'Moin, ');
-        if (replacement === trimmed) return;
-      }
+          if (!replacement) {
+            replacement = trimmed.replace(/^Hi,\s*/i, 'Moin, ');
+            if (replacement === trimmed) return;
+          }
 
-      node.nodeValue = original.replace(trimmed, replacement);
-    });
-
-    root.querySelectorAll('[aria-label], [title], input[placeholder]').forEach((element) => {
-      ['aria-label', 'title', 'placeholder'].forEach((attribute) => {
-        const value = element.getAttribute(attribute);
-        const replacement = value && translations[value.trim()];
-        if (replacement) element.setAttribute(attribute, replacement);
+          node.nodeValue = original.replace(trimmed, replacement);
+        } catch (error) {
+          // Knoten kann durch React zwischenzeitlich entfernt worden sein.
+        }
       });
+
+      root.querySelectorAll('[aria-label], [title], input[placeholder]').forEach((element) => {
+        ['aria-label', 'title', 'placeholder'].forEach((attribute) => {
+          try {
+            const value = element.getAttribute(attribute);
+            const replacement = value && translations[value.trim()];
+            if (replacement) element.setAttribute(attribute, replacement);
+          } catch (error) {
+            // s.o.
+          }
+        });
+      });
+    } finally {
+      translating = false;
+    }
+  }
+
+  function scheduleTranslate(accountDocument) {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      translate(accountDocument.body);
     });
   }
 
@@ -127,7 +163,12 @@
 
       if (accountDocument !== currentDocument) {
         currentDocument = accountDocument;
-        new MutationObserver(() => translate(accountDocument.body)).observe(accountDocument.body, {
+        if (currentObserver) currentObserver.disconnect();
+        currentObserver = new MutationObserver(() => {
+          if (translating) return; // eigene Änderungen nicht erneut anstoßen
+          scheduleTranslate(accountDocument);
+        });
+        currentObserver.observe(accountDocument.body, {
           childList: true,
           characterData: true,
           subtree: true
@@ -159,7 +200,10 @@
   function start() {
     scan();
     new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
-    window.setInterval(scan, 1000);
+    // Nur noch ein seltenes Sicherheitsnetz (statt jede Sekunde) für den
+    // Fall, dass sich der Konto-Inhalt ändert, ohne dass unser Observer es
+    // bemerkt - der Regelfall läuft über den MutationObserver oben.
+    window.setInterval(scan, 4000);
   }
 
   if (document.readyState === 'loading') {
