@@ -1,1 +1,8 @@
 .DS_Store
+
+# Bestell-/Kundendaten und interne Auswertungen - nicht fürs öffentliche Repo
+*.pdf
+*.xlsx
+*.xls
+*.csv
+Rechnungs-App/
