@@ -950,3 +950,108 @@ body {
     font-size: 0.85rem;
   }
 }
+
+/* =========================================================
+   21. WILL-MYERS "STORE FILTER"-PLUGIN
+   Aus Seiten-Code-Injections zusammengeführt, damit es zentral
+   versioniert ist. Betrifft die Shop-Filterleiste (/shop und
+   Kategorieseiten): Sprungziel-Abstand, Leerzustand ohne Treffer und
+   der kompakte "Filter zurücksetzen"-Button.
+   ========================================================= */
+/* Abstand für direkte Shop-Kategorielinks */
+#shop-filter {
+  scroll-margin-top: clamp(5rem, 10vw, 8rem);
+}
+
+/* Leerer Ergebniszustand des Filters */
+.wm-store-filter-empty {
+  box-sizing: border-box;
+  width: min(100%, 42rem);
+  margin: clamp(2rem, 6vw, 5rem) auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 3px solid var(--wm-store-filter-accent, #287f80);
+  border-radius: var(--wm-store-filter-radius, 6px);
+}
+.wm-store-filter-empty-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+.wm-store-filter-empty-text {
+  max-width: 34rem;
+  margin: 0.75rem auto 0;
+  line-height: 1.55;
+  opacity: 0.8;
+}
+@media (max-width: 767px) {
+  .wm-store-filter-empty {
+    margin-block: 1.5rem;
+    text-align: left;
+  }
+  .wm-store-filter-empty-text {
+    margin-inline: 0;
+  }
+}
+
+/* Kompakter Button zum Zurücksetzen der Shopfilter */
+.wm-store-filter-clear.wm-store-filter-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  color: var(--wm-store-filter-accent, #287f80);
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: var(--wm-store-filter-control-radius, 4px);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+.wm-store-filter-clear.wm-store-filter-button-secondary::before {
+  content: "×";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none !important;
+}
+.wm-store-filter-clear.wm-store-filter-button-secondary:hover {
+  color: var(--wm-store-filter-accent-contrast, #fff);
+  background: var(--wm-store-filter-accent, #287f80);
+}
+.wm-store-filter-clear.wm-store-filter-button-secondary:focus-visible {
+  outline: 2px solid var(--wm-store-filter-accent, #287f80);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wm-store-filter-clear.wm-store-filter-button-secondary {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   22. WILL-MYERS "COLLECTION CAROUSEL"-PLUGIN
+   Preis-/Bullet-Darstellung im Karussell (Design-Variablen des
+   Plugins selbst, s. wmCollectionCarousel.css).
+   ========================================================= */
+[data-wm-plugin="collection-carousel"] {
+  --wm-cc-price-color: #245955;
+  --wm-cc-price-font-size: 1.4rem;
+  --wm-cc-title-font-size: 2.8rem;
+  --wm-cc-active-bullet-color: white;
+  --wm-cc-inactive-bullet-color: #454545;
+  --wm-cc-inactive-bullet-opacity: 0.8;
+  --wm-cc-bullet-size: 12px;
+}
