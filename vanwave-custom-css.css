@@ -1047,7 +1047,7 @@ body {
    Plugins selbst, s. wmCollectionCarousel.css).
    ========================================================= */
 [data-wm-plugin="collection-carousel"] {
-  --wm-cc-price-color: #245955;
+  --wm-cc-price-color: var(--price-color);
   --wm-cc-price-font-size: 1.4rem;
   --wm-cc-title-font-size: 2.8rem;
   --wm-cc-active-bullet-color: white;
