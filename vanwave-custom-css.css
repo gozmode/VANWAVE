@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 26.09.2026
+   Stand: 30.09.2026
    ========================================================= */
 
 /* =========================================================
@@ -836,4 +836,58 @@ body {
 .product-description p:has(> em:only-child) em {
   font-style: normal !important;
   color: #fff !important;
+}
+
+/* =========================================================
+   19. TABELLEN (Squarespace-Editor "Tabelle einfügen")
+   Greift auf die native Squarespace-Markup-Klasse .table_component,
+   die der Editor beim Einfügen einer Tabelle selbst erzeugt - läuft
+   also überall, wo im Text eine Tabelle eingefügt wird, nicht nur in
+   der Produktbeschreibung. Header-Zeile wird an der ersten Tabellen-
+   zeile erkannt (Squarespace markiert sie nicht als <th>, nur die
+   Zellen darin als <strong>). Eigene helle Kartenoptik unabhängig vom
+   Section-Theme, wie schon bei der "Kompatibel mit"-Box.
+   ========================================================= */
+.table_component {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 16px var(--info-box-margin-right) 16px 0;
+  border: 1px solid #e2ded7;
+}
+.table_component table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+  color: #202322;
+  background: #fff;
+}
+.table_component tr:first-child {
+  background: var(--price-color);
+}
+.table_component tr:first-child td {
+  color: #fff;
+  font-family: rama-gothic-e;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.table_component tr:first-child td strong {
+  font-weight: inherit;
+}
+.table_component td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2ded7;
+  text-align: left;
+}
+.table_component tr:last-child td {
+  border-bottom: none;
+}
+.table_component tr:nth-child(even) {
+  background: #f7f5f2;
+}
+.table_component td:last-child {
+  text-align: right;
 }
