@@ -856,23 +856,17 @@ body {
 }
 .table_component table {
   width: 100%;
-  min-width: 420px;
   border-collapse: collapse;
   font-family: "Open Sans", sans-serif;
   font-size: 0.9rem;
   color: #202322;
   background: #fff;
 }
-.table_component tr:first-child {
-  background: var(--price-color);
-}
 .table_component tr:first-child td {
-  color: #fff;
+  color: var(--price-color);
   font-family: rama-gothic-e;
-  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  border-bottom: 2px solid var(--price-color);
 }
 .table_component tr:first-child td strong {
   font-weight: inherit;
@@ -890,4 +884,69 @@ body {
 }
 .table_component td:last-child {
   text-align: right;
+}
+@media (max-width: 480px) {
+  .table_component td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* =========================================================
+   20. TABELLEN (handgeschrieben, echtes <thead>/<th>)
+   Für Tabellen, die nicht über den Squarespace-Tabellen-Button,
+   sondern direkt als HTML in einem Code-Block eingefügt werden -
+   Klasse "shipping-table" im <table>-Tag setzen. Diese Variante nutzt
+   echte <th> und lässt die Überschrift bewusst in einem echten <h4>
+   stehen: dessen Schriftgröße kommt automatisch von den Squarespace-
+   Design-Einstellungen (Abschnitt "Schrift" -> Überschrift 4), statt
+   hier einen eigenen Wert zu raten - deshalb wirkt sie nicht mehr zu
+   klein und bleibt konsistent, falls die Website-Schrift mal geändert
+   wird. Kein Farbblock im Kopf mehr, nur eine Teal-Unterstreichung -
+   dezenter als eine volle Teal-Fläche. Kein erzwungenes min-width mehr,
+   dadurch auf dem Handy keine unnötige Scroll-Breite bei kurzen
+   Tabellen wie dieser Versandpreis-Tabelle.
+   ========================================================= */
+.shipping-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 16px var(--info-box-margin-right) 16px 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+  color: #202322;
+  background: #fff;
+}
+.shipping-table th,
+.shipping-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e2ded7;
+}
+.shipping-table thead th {
+  border-bottom: 2px solid var(--price-color);
+  vertical-align: bottom;
+}
+.shipping-table thead th h3,
+.shipping-table thead th h4,
+.shipping-table thead th h5 {
+  margin: 0;
+  color: var(--price-color);
+}
+.shipping-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.shipping-table tbody tr:nth-child(even) {
+  background: #f7f5f2;
+}
+.shipping-table th:last-child,
+.shipping-table td:last-child {
+  text-align: right;
+}
+@media (max-width: 480px) {
+  .shipping-table th,
+  .shipping-table td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
 }
