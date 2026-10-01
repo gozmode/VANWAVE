@@ -15,7 +15,8 @@
     );
     if (!heading) return false;
 
-    heading.textContent = selected ? selected.value : 'SHOP';
+    // "Alle Artikel" hat value="" - dann bleibt es bei "SHOP".
+    heading.textContent = selected && selected.value ? selected.value : 'SHOP';
     return !!selected;
   }
 
