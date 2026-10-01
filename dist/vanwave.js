@@ -1192,8 +1192,18 @@ try {
     var inputs = Array.from(
       document.querySelectorAll('.wm-store-filter-group[data-type="category"] .wm-store-filter-input[type="radio"]')
     );
+    // Das Plugin setzt als value je nach Datenlage den Kategorienamen oder
+    // den URL-Pfad (bei Unterkategorien "eltern/kind") - deshalb auch die
+    // sichtbare Beschriftung und das letzte Pfadsegment vergleichen.
+    var wanted = slug(requested);
     var input = inputs.find(function (item) {
-      return slug(item.value) === slug(requested);
+      var option = item.closest('.wm-store-filter-option');
+      var label = option && option.querySelector('.wm-store-filter-option-label');
+      return (
+        slug(item.value) === wanted ||
+        slug(item.value.split('/').pop()) === wanted ||
+        (label && slug(label.textContent) === wanted)
+      );
     });
 
     if (input) {
@@ -1315,8 +1325,16 @@ try {
     );
     if (!headings.length) return false;
 
-    // "Alle Artikel" hat value="" - dann bleibt es bei "SHOP".
-    var text = selected && selected.value ? selected.value : 'SHOP';
+    // "Alle Artikel" hat value="" - dann bleibt es bei "SHOP". Angezeigt
+    // wird die Beschriftung der Option, nicht ihr value: Je nach Datenlage
+    // setzt das Plugin als value den Kategorienamen oder den URL-Pfad
+    // (z.B. "vanslide-zubehoer").
+    var text = 'SHOP';
+    if (selected && selected.value) {
+      var option = selected.closest('.wm-store-filter-option');
+      var label = option && option.querySelector('.wm-store-filter-option-label');
+      text = (label && label.textContent.trim()) || selected.value;
+    }
     headings.forEach(function (heading) {
       heading.textContent = text;
     });

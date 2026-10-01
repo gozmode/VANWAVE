@@ -117,8 +117,18 @@
     var inputs = Array.from(
       document.querySelectorAll('.wm-store-filter-group[data-type="category"] .wm-store-filter-input[type="radio"]')
     );
+    // Das Plugin setzt als value je nach Datenlage den Kategorienamen oder
+    // den URL-Pfad (bei Unterkategorien "eltern/kind") - deshalb auch die
+    // sichtbare Beschriftung und das letzte Pfadsegment vergleichen.
+    var wanted = slug(requested);
     var input = inputs.find(function (item) {
-      return slug(item.value) === slug(requested);
+      var option = item.closest('.wm-store-filter-option');
+      var label = option && option.querySelector('.wm-store-filter-option-label');
+      return (
+        slug(item.value) === wanted ||
+        slug(item.value.split('/').pop()) === wanted ||
+        (label && slug(label.textContent) === wanted)
+      );
     });
 
     if (input) {

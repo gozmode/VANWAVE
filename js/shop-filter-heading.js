@@ -37,8 +37,16 @@
     );
     if (!headings.length) return false;
 
-    // "Alle Artikel" hat value="" - dann bleibt es bei "SHOP".
-    var text = selected && selected.value ? selected.value : 'SHOP';
+    // "Alle Artikel" hat value="" - dann bleibt es bei "SHOP". Angezeigt
+    // wird die Beschriftung der Option, nicht ihr value: Je nach Datenlage
+    // setzt das Plugin als value den Kategorienamen oder den URL-Pfad
+    // (z.B. "vanslide-zubehoer").
+    var text = 'SHOP';
+    if (selected && selected.value) {
+      var option = selected.closest('.wm-store-filter-option');
+      var label = option && option.querySelector('.wm-store-filter-option-label');
+      text = (label && label.textContent.trim()) || selected.value;
+    }
     headings.forEach(function (heading) {
       heading.textContent = text;
     });
