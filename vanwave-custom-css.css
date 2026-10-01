@@ -41,10 +41,11 @@
 .product-detail.bundle-product .pdp-gallery::after,
 .product-detail.refurbished-product .pdp-gallery::after {
   font-family: var(--vw-display-font) !important;
-  font-size: 2.2rem !important;
+  font-size: 1.75rem !important;
   font-weight: bold !important;
   line-height: 1 !important;
   text-transform: uppercase !important;
+  white-space: nowrap !important;
   padding: 0.15em 0.4em !important;
   margin: 0 !important;
 }

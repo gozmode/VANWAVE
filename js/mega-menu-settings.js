@@ -1,5 +1,5 @@
 window.wmMegaMenuSettings = {
   layout: 'full-width', // full-width or inset
   openAnimation: 'slide', // slide, fade, or swing
-  openOnClick: true
+  openOnClick: false // false = am Desktop beim Überfahren öffnen
 }
