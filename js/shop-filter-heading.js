@@ -9,14 +9,18 @@
   var started = Date.now();
 
   function update() {
-    var heading = document.querySelector('.product-list-header .nested-category-title');
+    // Squarespace rendert die Überschrift doppelt (Desktop und Mobil).
+    var headings = document.querySelectorAll('.product-list-header .nested-category-title');
     var selected = document.querySelector(
       '.wm-store-filter-group[data-type="category"] .wm-store-filter-input[type="radio"]:checked'
     );
-    if (!heading) return false;
+    if (!headings.length) return false;
 
     // "Alle Artikel" hat value="" - dann bleibt es bei "SHOP".
-    heading.textContent = selected && selected.value ? selected.value : 'SHOP';
+    var text = selected && selected.value ? selected.value : 'SHOP';
+    headings.forEach(function (heading) {
+      heading.textContent = text;
+    });
     return !!selected;
   }
 

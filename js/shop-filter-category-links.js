@@ -4,7 +4,8 @@
 // Läuft auf jeder Seite (Desktop- und Mobilmenü, Kategorieliste im Shop
 // selbst), auch für Links, die erst nachträglich ins DOM kommen.
 // Auf /shop selbst wird beim Laden zusätzlich die passende Filter-Option
-// anhand des Parameters angeklickt.
+// anhand des Parameters angeklickt. Auf Produktseiten bekommt außerdem
+// der "SHOP"-Link der Brotkrumen-Navigation das Sprungziel #shop-filter.
 
 (function () {
   'use strict';
@@ -49,9 +50,40 @@
     link.dataset.vwCategoryLink = 'true';
   }
 
+  // Auf Produktseiten (/shop/p/...) springt der "SHOP"-Link der
+  // Brotkrumen-Navigation direkt zur Produktliste statt zum Seitenanfang.
+  // Der Hauptmenüpunkt /shop bleibt unverändert.
+  var onProductPage = /^\/shop\/p\//i.test(location.pathname);
+  var BREADCRUMB = '.product-nav, .ProductItem-nav, .ProductItem-nav-breadcrumb, [class*="ProductItem-nav"]';
+
+  function rewriteProductShopLink(link) {
+    if (!onProductPage || !link || link.dataset.vwProductShopLink === 'true') return;
+
+    var url;
+    try {
+      url = new URL(link.href, location.origin);
+    } catch (error) {
+      return;
+    }
+    if (url.origin !== location.origin || url.pathname.replace(/\/+$/, '') !== SHOP) return;
+    if (!link.closest(BREADCRUMB)) return;
+
+    url.hash = ANCHOR;
+    link.href = url.pathname + url.search + url.hash;
+    link.dataset.vwProductShopLink = 'true';
+  }
+
   function rewriteAll(root) {
-    if (root instanceof HTMLAnchorElement) rewrite(root);
-    if (root.querySelectorAll) root.querySelectorAll('a[href]').forEach(rewrite);
+    if (root instanceof HTMLAnchorElement) {
+      rewrite(root);
+      rewriteProductShopLink(root);
+    }
+    if (root.querySelectorAll) {
+      root.querySelectorAll('a[href]').forEach(function (link) {
+        rewrite(link);
+        rewriteProductShopLink(link);
+      });
+    }
   }
 
   function start() {

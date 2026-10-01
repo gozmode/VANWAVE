@@ -40,13 +40,34 @@
     });
   }
 
+  // Kommt der Aufruf über einen Kategorielink (?vw-category-slug=), erst
+  // scrollen, wenn js/shop-filter-category-links.js die Kategorie gewählt
+  // hat - der Filter verändert beim Aufbau noch das Layout.
+  var needsCategory = new URLSearchParams(location.search).has('vw-category-slug');
+
+  function categoryApplied() {
+    return !!document.querySelector(
+      '.wm-store-filter-group[data-type="category"] .wm-store-filter-input[type="radio"]:checked:not([value=""])'
+    );
+  }
+
   (function waitForHeading() {
     var el = heading();
+    var timedOut = Date.now() - started >= 15000;
+
     if (el) {
       el.id = ANCHOR;
-      scrollToAnchor(el);
-      return;
+      if (!needsCategory || timedOut) {
+        scrollToAnchor(el);
+        return;
+      }
+      if (categoryApplied()) {
+        setTimeout(function () {
+          scrollToAnchor(el);
+        }, 120);
+        return;
+      }
     }
-    if (Date.now() - started < 15000) setTimeout(waitForHeading, 100);
+    if (!timedOut) setTimeout(waitForHeading, 100);
   })();
 })();
