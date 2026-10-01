@@ -969,6 +969,18 @@ body {
   scroll-margin-top: clamp(5rem, 10vw, 8rem);
 }
 
+/* Einleitungstext unter der Kategorie-Überschrift (js/shop-filter-intro.js,
+   Texte in der Code-Injection der Shop-Seite: window.vwShopIntroTexts) */
+.product-list-header .vw-shop-intro {
+  max-width: 44rem;
+  margin: 1rem auto 0;
+  text-align: center;
+  line-height: 1.55;
+}
+.product-list-header .vw-shop-intro[hidden] {
+  display: none;
+}
+
 /* Leerer Ergebniszustand des Filters */
 .wm-store-filter-empty {
   box-sizing: border-box;

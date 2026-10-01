@@ -37,7 +37,8 @@ const FILES = [
   'js/shop-filter-anchor.js',
   'js/shop-filter-category-links.js',
   'js/shop-filter-remove-empty.js',
-  'js/shop-filter-heading.js'
+  'js/shop-filter-heading.js',
+  'js/shop-filter-intro.js'
 ];
 
 function build() {
