@@ -22,7 +22,37 @@
   // Squarespace gelöscht ist, kann dieser Block entfallen.
   var LEGACY_SECTION_ID = '6aa6ba2cc7c1be040da45df4';
 
+  // Squarespace-Funktion "Text skalieren": Solange der Container nicht die
+  // Klasse "loaded" hat, parkt Squarespaces CSS den Text unsichtbar links
+  // außerhalb. Größe und Klasse setzt sonst ein Squarespace-Skript, das
+  // nachgeladenen Inhalt nicht kennt - deshalb hier selbst so groß machen,
+  // dass die längste Zeile die Blockbreite füllt.
+  function fitScaledText(root) {
+    root.querySelectorAll('.sqsrte-scaled-text-container').forEach(function (container) {
+      var text = container.querySelector('.sqsrte-scaled-text');
+      var available = container.clientWidth;
+      if (!text || !available) return;
+
+      container.classList.remove('loaded');
+      text.style.width = 'max-content';
+      text.style.fontSize = '100px';
+      var needed = text.getBoundingClientRect().width;
+      text.style.width = '';
+      if (!needed) {
+        text.style.fontSize = '';
+        return;
+      }
+      text.style.fontSize = (100 * available) / needed + 'px';
+      container.classList.add('loaded');
+    });
+  }
+
   function start() {
+    // Auf der Quellseite selbst keine Leiste: Ihr Abschnitt stünde sonst
+    // doppelt im Dokument (gleiche IDs) - dann lässt sich die Seite im
+    // Squarespace-Editor nicht mehr bearbeiten.
+    if ((location.pathname.replace(/\/+$/, '') || '/') === CONTENT_URL) return;
+
     var legacy = document.querySelector('section[data-section-id="' + LEGACY_SECTION_ID + '"]');
     if (legacy) legacy.classList.add('original-footer-section');
 
@@ -81,6 +111,7 @@
       if (!section || inner.firstChild) return;
       inner.appendChild(section);
       wrapper.classList.remove('no-content');
+      fitScaledText(inner);
     }
 
     function useLegacy() {
@@ -112,6 +143,7 @@
       var barHeight = trigger.getBoundingClientRect().height;
       if (header) header.style.top = barHeight + 'px';
       document.body.style.paddingTop = barHeight + 'px';
+      fitScaledText(inner);
     }
 
     var isOpen = false;

@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 01.10.2026
+   Stand: 02.10.2026
    ========================================================= */
 
 /* =========================================================
@@ -489,8 +489,8 @@ body:has(#accountFrame) .announcement-bar-wrapper {
 
 .announcement-trigger {
   background: #245955;
-  color: #000;
-  padding: 15px 15px;
+  color: #fff;
+  padding: 15px 44px; /* seitlich Platz für das X, auch bei langem Text mobil */
   cursor: pointer;
   text-align: center;
   position: relative;
@@ -504,7 +504,7 @@ body:has(#accountFrame) .announcement-bar-wrapper {
 }
 
 .announcement-trigger:hover {
-  background: #fff;
+  background: #1c4744;
 }
 
 .announcement-trigger .icon {
@@ -1000,9 +1000,10 @@ body {
   }
 }
 
-/* Mobiler "Filter"-Knopf: als gefüllter Button statt unauffälligem Textlink */
-.wm-store-filter-mobile-toggle {
-  display: inline-flex;
+/* Mobiler "Filter"-Knopf: als gefüllter Button statt unauffälligem Textlink.
+   Selektor bewusst spezifischer als im Plugin (.wm-store-filter-mobile-toggle):
+   dessen Stylesheet lädt nach dem Custom CSS und gewinnt sonst bei Gleichstand. */
+.wm-store-filter .wm-store-filter-toolbar .wm-store-filter-mobile-toggle {
   align-items: center;
   gap: 0.55rem;
   min-height: 44px;
@@ -1019,7 +1020,7 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
-.wm-store-filter-mobile-toggle:focus-visible {
+.wm-store-filter .wm-store-filter-toolbar .wm-store-filter-mobile-toggle:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }
