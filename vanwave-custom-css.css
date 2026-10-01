@@ -1,17 +1,22 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 30.09.2026
+   Stand: 01.10.2026
    ========================================================= */
 
 /* =========================================================
-   00. VARIABLEN – PRODUKTPREIS-SCHRIFTGRÖSSEN
+   00. VARIABLEN – ÜBERSCHRIFTEN-SCHRIFT & PRODUKTPREIS-SCHRIFTGRÖSSEN
    Hier zentral anpassen statt in den einzelnen Abschnitten:
+   --vw-display-font ist die Schrift für Preise, Badges, Summary-Titel
+     und Tabellenköpfe. Sie folgt automatisch der in Squarespace
+     eingestellten Überschriften-Schrift (Website-Stile > Schriftarten);
+     "Barlow Condensed" ist nur der Rückfall, falls die Variable fehlt.
    --price-font-size-summary wirkt in Abschnitt 06 (Summary Block,
      z.B. auf Seiten mit einem Summary-Block-Element wie /neue-seite)
    --price-font-size-list wirkt in Abschnitt 07 (Shop-Übersicht /
      Produktkategorie-Seiten wie /shop/vanslide-heckauszuege)
    ========================================================= */
 :root {
+  --vw-display-font: var(--heading-font-font-family, "Barlow Condensed"), "Barlow Condensed", sans-serif;
   --price-font-size-summary: 2rem;
   --price-font-size-list: 2rem;
   --price-font-size-detail: 2.5rem;
@@ -35,7 +40,7 @@
 .product-detail.on-sale .pdp-gallery::after,
 .product-detail.bundle-product .pdp-gallery::after,
 .product-detail.refurbished-product .pdp-gallery::after {
-  font-family: rama-gothic-e !important;
+  font-family: var(--vw-display-font) !important;
   font-size: 2.2rem !important;
   font-weight: bold !important;
   line-height: 1 !important;
@@ -229,11 +234,11 @@
 /* =========================================================
    04. PRODUKTDETAILSEITE – PREIS
    ========================================================= */
-/* Preis-Formatierung wie im Shop-Grid (Abschnitt 07): rama-gothic-e / 600,
+/* Preis-Formatierung wie im Shop-Grid (Abschnitt 07): Überschriften-Schrift / 600,
    Normalpreis Teal, reduzierter Preis rot, Streichpreis in Textfarbe des
    Section-Themes (hell auf dunklem, dunkel auf hellem Grund) und gleich groß. */
 .product-detail .product-price-value {
-  font-family: rama-gothic-e !important;
+  font-family: var(--vw-display-font) !important;
   font-size: var(--price-font-size-detail) !important;
   font-weight: 600 !important;
   color: var(--price-color) !important;
@@ -283,11 +288,11 @@
    Section-Hintergrund an. */
 .summary-title {
   margin-top: 5px !important;
-  font-family: rama-gothic-e;
+  font-family: var(--vw-display-font);
   font-size: 2.23rem !important;
   font-style: normal !important;
   font-weight: 600 !important;
-  letter-spacing: -0.03em !important;
+  letter-spacing: var(--heading-font-letter-spacing, -0.03em) !important;
   text-transform: uppercase !important;
   line-height: 1 !important;
 }
@@ -295,13 +300,13 @@
 /* =========================================================
    06. SUMMARY BLOCK – PREISE
    ========================================================= */
-/* Preis-Formatierung wie /shop (Abschnitt 07): rama-gothic-e / 600, aktueller
+/* Preis-Formatierung wie /shop (Abschnitt 07): Überschriften-Schrift / 600, aktueller
    Preis immer Teal (auch bei reduzierten Produkten, anders als im Shop-Grid).
    Der Streichpreis steht in Open Sans, Textfarbe des Section-Themes (hell auf
    dunklem, dunkel auf hellem Grund) und gleich groß wie der aktuelle Preis. */
 .summary-price .product-price {
   margin-top: 15px !important;
-  font-family: rama-gothic-e !important;
+  font-family: var(--vw-display-font) !important;
   font-size: var(--price-font-size-summary) !important;
   font-weight: 600 !important;
   color: var(--price-color) !important;
@@ -410,7 +415,7 @@
 }
 /* Add-on Produktpreis */
 .product-add-ons .add-on-details .product-price {
-  font-family: rama-gothic-e !important;
+  font-family: var(--vw-display-font) !important;
   font-size: var(--price-font-size-addon) !important;
   font-weight: 600 !important;
   color: var(--price-color) !important;
@@ -864,7 +869,7 @@ body {
 }
 .table_component tr:first-child td {
   color: var(--price-color);
-  font-family: rama-gothic-e;
+  font-family: var(--vw-display-font);
   font-weight: 600;
   border-bottom: 2px solid var(--price-color);
 }

@@ -6,3 +6,6 @@
 *.xls
 *.csv
 Rechnungs-App/
+
+# Lokale Schriftvorschau (enthält lizenzierte Schriftdatei)
+schrift-vergleich.html
