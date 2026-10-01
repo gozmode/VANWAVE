@@ -461,8 +461,9 @@
 
 /* =========================================================
    12. MEGA ANNOUNCEMENT BAR
-   Zieht den Inhalt der "Extra Footer"-Sektion in eine fixierte,
-   aufklappbare Leiste oben auf der Seite (siehe js/mega-announcement-bar.js)
+   Fixierte, aufklappbare Leiste oben auf der Seite (siehe
+   js/mega-announcement-bar.js). Text der Leiste: native
+   Squarespace-Ankündigungsleiste. Aufklappbarer Inhalt: Seite /announce.
    ========================================================= */
 .announcement-bar-wrapper {
   position: fixed;
@@ -516,6 +517,14 @@ body:has(#accountFrame) .announcement-bar-wrapper {
   transform: rotate(180deg);
 }
 
+/* Ohne aufklappbaren Inhalt (/announce fehlt): kein Pfeil, kein Klick-Zeiger */
+.announcement-bar-wrapper.no-content .announcement-trigger {
+  cursor: default;
+}
+.announcement-bar-wrapper.no-content .announcement-trigger .icon {
+  display: none;
+}
+
 .announcement-content {
   position: absolute;
   top: 100%;
@@ -548,7 +557,8 @@ body:has(#accountFrame) .announcement-bar-wrapper {
   opacity: 1;
 }
 
-/* Original-Squarespace-Ankündigungsleiste ausblenden */
+/* Original-Squarespace-Ankündigungsleiste ausblenden (wir nutzen nur ihren
+   Text als Quelle, nicht ihre eigene Optik) */
 .sqs-announcement-bar-dropzone {
   display: none !important;
 }
@@ -558,7 +568,9 @@ body {
   transition: padding-top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Original-Footer-Sektion (Quelle der Ankündigung) ausblenden */
+/* Frühere Quelle der Ankündigung (Extra-Footer-Sektion): bleibt ausgeblendet,
+   solange sie in Squarespace noch existiert. Die Klasse setzt das JS zur
+   Laufzeit - im Editor bleibt die Sektion dadurch sichtbar und bearbeitbar. */
 .original-footer-section {
   display: none !important;
 }
@@ -979,6 +991,37 @@ body {
 }
 .product-list-header .vw-shop-intro[hidden] {
   display: none;
+}
+@media (max-width: 767px) {
+  /* Mobil ist die Überschrift linksbündig - Text daran ausrichten */
+  .product-list-header .vw-shop-intro {
+    margin-inline: 0;
+    text-align: left;
+  }
+}
+
+/* Mobiler "Filter"-Knopf: als gefüllter Button statt unauffälligem Textlink */
+.wm-store-filter-mobile-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  color: var(--wm-store-filter-accent-contrast, #fff);
+  background: var(--wm-store-filter-accent, #287f80);
+  border: 1px solid var(--wm-store-filter-accent, #287f80);
+  border-radius: var(--wm-store-filter-control-radius, 4px);
+  font-family: var(--vw-display-font);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.wm-store-filter-mobile-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 /* Leerer Ergebniszustand des Filters */
