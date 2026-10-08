@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 02.10.2026
+   Stand: 08.10.2026
    ========================================================= */
 
 /* =========================================================
@@ -628,10 +628,16 @@ body {
   padding: 80px !important;
 }
 
-/* Auf Mobile umbricht die volle Größe (6rem) nicht schön, daher hier kleiner. */
+/* Mobile: Schrift an die Bildschirmbreite koppeln und das seitliche Padding
+   (80px links + rechts = 160px weniger Platz) verkleinern, sonst bricht
+   "Warenkorb" mitten im Wort um ("WARENKO / RB"). */
 @media only screen and (max-width: 640px) {
   .cart-title {
-    font-size: 66px !important;
+    font-size: clamp(2.6rem, 13vw, 4rem) !important;
+    padding: 40px 16px !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
   }
 }
 
