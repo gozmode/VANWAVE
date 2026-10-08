@@ -1,6 +1,6 @@
 /* =========================================================
    VANWAVE – CUSTOM CSS
-   Stand: 08.10.2026
+   Stand: 09.10.2026
    ========================================================= */
 
 /* =========================================================
@@ -1122,4 +1122,20 @@ body {
   --wm-cc-inactive-bullet-color: #454545;
   --wm-cc-inactive-bullet-opacity: 0.8;
   --wm-cc-bullet-size: 12px;
+}
+
+/* =========================================================
+   23. MEGA MENU – KAPUTTEN "ZURÜCK"-BUTTON AUSBLENDEN (MOBILE)
+   Für Mega-Menu-Einträge (Klasse "mobile-mega-menu-folder") baut
+   Squarespace den "Zurück"-Button aus seiner eigenen, nativen
+   Ordner-Steuerung (.header-menu-controls-control). Bei Mega-Menu-
+   Einträgen rendert dieser Button außerhalb des sichtbaren Bereichs
+   bzw. überlappend mit dem fixierten Header und ist nicht antippbar.
+   Bei normalen Squarespace-Ordnern (ohne Mega-Menu) funktioniert
+   derselbe Button einwandfrei - deshalb hier gezielt nur innerhalb
+   von .mobile-mega-menu-folder ausgeblendet, nicht global. Verlassen
+   des Untermenüs bleibt über das X oben rechts möglich.
+   ========================================================= */
+.mobile-mega-menu-folder .header-menu-controls-control {
+  display: none !important;
 }
